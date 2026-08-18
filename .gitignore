@@ -1,0 +1,21 @@
+# Virtual environments
+matrix_env/
+venv/
+.venv/
+env/
+
+# Python bytecode / caches
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+
+# Secrets - never commit real .env files
+.env
+!.env.example
+
+# OS cruft
+.DS_Store
+
+# Assignment brief (not part of the submission)
+subject_P08.pdf
