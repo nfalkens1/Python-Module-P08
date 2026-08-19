@@ -35,7 +35,7 @@ def get_path_info() -> dict[str, str]:
     return format_out
 
 
-def env_message(path_data: dict[str, str]) -> str:
+def venv_message(path_data: dict[str, str]) -> str:
     """
     Creates output message for venv.
     """
@@ -55,8 +55,8 @@ def env_message(path_data: dict[str, str]) -> str:
         f"Environment Path: {env_path}",
         "",
         success_message,
-        "Safe to install packages without affecting"
-        "the global system."
+        "Safe to install packages without affecting",
+        "the global system.",
         "",
         "Package installation path:",
         inst_path
@@ -70,8 +70,35 @@ def global_message(path_data: dict[str, str]) -> str:
     """
     Creates warning message for global environment.
     """
-    ...
+    matrix_status = "MATRIX STATUS: You're still plugged in"
+    warning_message = "WARNING: You're in the global environment!"
+    cur_python = path_data["Current Python"]
+    venv_name = "None detected"
+
+    raw_out = [
+        "",
+        matrix_status,
+        "",
+        f"Current Python: {cur_python}",
+        f"Virtual Environment: {venv_name}",
+        "",
+        warning_message,
+        "The machines can see everything you install.",
+        "",
+        "To enter the construct, run:",
+        "python -m venv matrix_env",
+        "source matrix_env/bin/activate # On Unix",
+        "matrix_env\\Scripts\\activate # On Windows",
+        "",
+        "Then run this program again."
+    ]
+
+    format_out = "\n".join(raw_out)
+    return format_out
 
 
 if __name__ == "__main__":
-    ...
+    if is_venv():
+        print(venv_message(get_path_info()))
+    else:
+        print(global_message(get_path_info()))
