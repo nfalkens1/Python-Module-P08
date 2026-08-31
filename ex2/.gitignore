@@ -1,0 +1,3 @@
+# env ignores:
+.env*
+!.env.example
